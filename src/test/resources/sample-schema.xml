@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbe:messageSchema xmlns:sbe="http://fixprotocol.io/2016/sbe" id="1" package="com.transficc.wiresharktools.testschema.protocol" semanticVersion="0.0.1" version="1" byteOrder="littleEndian">
+    <types>
+        <type name="charField" primitiveType="char" characterEncoding="ASCII"/>
+        <type name="char20Field" primitiveType="char" length="20" characterEncoding="ASCII"/>
+        <type name="int8Field" primitiveType="int8"/>
+        <type name="int16Field" primitiveType="int16"/>
+        <type name="int32Field" primitiveType="int32"/>
+        <type name="constantField" primitiveType="int32" presence="constant">9000</type>
+        <type name="constantStringField" primitiveType="char" presence="constant" length="8" semanticType="String">CONSTANT</type>
+        <type name="int64Field" primitiveType="int64"/>
+        <type name="uint8Field" primitiveType="uint8"/>
+        <type name="uint16Field" primitiveType="uint16"/>
+        <type name="uint32Field" primitiveType="uint32"/>
+        <type name="uint64Field" primitiveType="uint64"/>
+        <type name="floatField" primitiveType="float"/>
+        <type name="doubleField" primitiveType="double"/>
+        <type name="int32ArrayField" primitiveType="int32" length="10"/>
+        <composite name="composite">
+            <ref name="compositeField1" type="int8Field"/>
+            <ref name="compositeField2" type="int32Field"/>
+            <composite name="subComposite">
+                <type name="subCompositeField1" primitiveType="char" length="3"/>
+            </composite>
+        </composite>
+        <composite name="compositeWithEnum">
+            <ref name="enumField" type="enumField"/>
+        </composite>
+        <enum name="enumField" encodingType="uint8">
+            <validValue name="OPTION1">10</validValue>
+        </enum>
+        <enum name="enumCharField" encodingType="char">
+            <validValue name="char1" description="Market With Protection">1</validValue>
+            <validValue name="char2" description="Limit">2</validValue>
+        </enum>
+        <enum name="EnumConstantField" encodingType="uint8">
+            <validValue name="OPTION2">11</validValue>
+        </enum>
+        <composite name="varStringEncoding">
+            <type name="length" maxValue="1073741824" primitiveType="uint32"/>
+            <type name="varData" characterEncoding="ASCII" length="0" primitiveType="uint8"/>
+        </composite>
+        <set name="choices" encodingType="uint8">
+            <choice name="bacon">1</choice>
+            <choice name="lettuce">2</choice>
+            <choice name="tomato">3</choice>
+        </set>
+        <set name="moarChoices" encodingType="uint32">
+            <choice name="moarBacon">29</choice>
+            <choice name="moarLettuce">30</choice>
+            <choice name="moarTomato">31</choice>
+        </set>
+        <composite description="Repeating group dimensions" name="groupSizeEncoding">
+            <type name="blockLength" primitiveType="uint16"/>
+            <type name="numInGroup" primitiveType="uint16"/>
+        </composite>
+        <composite description="Message identifiers and length of message root" name="messageHeader">
+            <type name="blockLength" primitiveType="uint16"/>
+            <type name="templateId" primitiveType="uint16"/>
+            <type name="schemaId" primitiveType="uint16"/>
+            <type name="version" primitiveType="uint16"/>
+        </composite>
+        <composite name="varDataEncoding">
+            <type name="length" maxValue="1073741824" primitiveType="uint32"/>
+            <type name="varData" characterEncoding="UTF-8" length="0" primitiveType="uint8"/>
+        </composite>
+    </types>
+    <sbe:message name="charField" id="1">
+        <field name="charField" id="1" type="charField"/>
+    </sbe:message>
+    <sbe:message name="offsetField" id="2">
+        <field name="offsetField" id="1" type="charField" offset="23"/>
+    </sbe:message>
+    <sbe:message name="char20Field" id="3">
+        <field name="char20Field" id="1" type="char20Field"/>
+    </sbe:message>
+    <sbe:message name="int8Field" id="4">
+        <field name="int8Field" id="1" type="int8Field"/>
+    </sbe:message>
+    <sbe:message name="int16Field" id="5">
+        <field name="int16Field" id="1" type="int16Field"/>
+    </sbe:message>
+    <sbe:message name="int32Field" id="6">
+        <field name="int32Field" id="1" type="int32Field"/>
+    </sbe:message>
+    <sbe:message name="int64Field" id="7">
+        <field name="int64Field" id="1" type="int64Field"/>
+    </sbe:message>
+    <sbe:message name="uint8Field" id="8">
+        <field name="uint8Field" id="1" type="uint8Field"/>
+    </sbe:message>
+    <sbe:message name="uint16Field" id="9">
+        <field name="uint16Field" id="1" type="uint16Field"/>
+    </sbe:message>
+    <sbe:message name="uint32Field" id="10">
+        <field name="uint32Field" id="1" type="uint32Field"/>
+    </sbe:message>
+    <sbe:message name="uint64Field" id="11">
+        <field name="uint64Field" id="1" type="uint64Field"/>
+    </sbe:message>
+    <sbe:message name="floatField" id="12">
+        <field name="floatField" id="1" type="floatField"/>
+    </sbe:message>
+    <sbe:message name="doubleField" id="13">
+        <field name="doubleField" id="1" type="doubleField"/>
+    </sbe:message>
+    <sbe:message name="int32ArrayField" id="14">
+        <field name="int32ArrayField" id="1" type="int32ArrayField"/>
+    </sbe:message>
+    <sbe:message name="compositeField" id="15">
+        <field name="compositeField" id="16" type="composite"/>
+    </sbe:message>
+    <sbe:message name="enumField" id="16">
+        <field name="enumField" id="1" type="enumField"/>
+    </sbe:message>
+    <sbe:message name="choiceField" id="17">
+        <field name="choiceField" id="18" type="choices"/>
+    </sbe:message>
+    <sbe:message name="groupFieldMessage" id="18">
+        <field name="int32Field" id="1" type="int32Field"/>
+        <group name="groupField" id="19">
+            <field name="groupFixedLengthField" id="20" type="int32Field"/>
+            <group name="subGroupField" id="21">
+                <field name="subGroupFixedLengthField" id="22" type="int32Field"/>
+                <data name="subGroupVariableLengthField" id="23" type="varStringEncoding"/>
+            </group>
+            <data name="groupVariableLengthField" id="24" type="varStringEncoding"/>
+        </group>
+    </sbe:message>
+    <sbe:message name="varStringField" id="19">
+        <data name="varStringField" id="1" type="varStringEncoding"/>
+    </sbe:message>
+    <sbe:message name="constantField" id="20">
+        <field name="constantField" id="1" type="constantField"/>
+    </sbe:message>
+    <sbe:message name="enumConstantField" id="21">
+        <field name="EnumConstantField" id="1" type="EnumConstantField" presence="constant" valueRef="EnumConstantField.OPTION2"/>
+    </sbe:message>
+    <sbe:message name="moarChoiceField" id="22">
+        <field name="moarChoiceField" id="1" type="moarChoices"/>
+    </sbe:message>
+    <sbe:message name="compositeFieldWithEnum" id="23">
+        <field name="compositeFieldWithEnum" id="1" type="compositeWithEnum"/>
+    </sbe:message>
+    <sbe:message name="duplicateAcrossSchemas" id="24">
+        <field name="duplicateFieldAcrossSchemas" id="1" type="int32"/>
+    </sbe:message>
+    <sbe:message name="oldMessage" id="25">
+        <field name="int32Field1" id="1" type="int32Field"/>
+        <group name="groupField1" id="19">
+            <field name="groupFixedLengthField1" id="20" type="int32Field"/>
+            <data name="groupVariableLengthField1" id="24" type="varStringEncoding"/>
+        </group>
+        <data name="variableLengthField1" id="24" type="varStringEncoding"/>
+    </sbe:message>
+    <sbe:message name="newMessageFixedLengthFieldAdded" id="26">
+        <field name="int32Field1" id="1" type="int32Field"/>
+        <field name="int32Field2" id="2" type="int32Field" presence="optional" sinceVersion="2"/>
+        <group name="groupField1" id="19">
+            <field name="groupFixedLengthField1" id="20" type="int32Field"/>
+            <data name="groupVariableLengthField1" id="24" type="varStringEncoding"/>
+        </group>
+        <data name="variableLengthField1" id="24" type="varStringEncoding"/>
+    </sbe:message>
+    <sbe:message name="newMessageVariableLengthFieldAdded" id="27">
+        <field name="int32Field1" id="1" type="int32Field"/>
+        <group name="groupField1" id="19">
+            <field name="groupFixedLengthField1" id="20" type="int32Field"/>
+            <data name="groupVariableLengthField1" id="24" type="varStringEncoding"/>
+        </group>
+        <data name="variableLengthField1" id="24" type="varStringEncoding"/>
+        <data name="variableLengthField2" id="25" type="varStringEncoding" sinceVersion="2"/>
+    </sbe:message>
+    <sbe:message name="newMessageFixedLengthFieldAddedInGroup" id="28">
+        <field name="int32Field1" id="1" type="int32Field"/>
+        <group name="groupField1" id="19">
+            <field name="groupFixedLengthField1" id="20" type="int32Field"/>
+            <field name="groupFixedLengthField2" id="21" type="int32Field" presence="optional" sinceVersion="2"/>
+            <data name="groupVariableLengthField1" id="24" type="varStringEncoding"/>
+        </group>
+        <data name="variableLengthField1" id="24" type="varStringEncoding"/>
+    </sbe:message>
+    <sbe:message name="enumChar" id="29">
+        <field name="enumCharField" id="1" type="enumCharField"/>
+    </sbe:message>
+    <sbe:message name="notAllowedWordMessage" id="30">
+        <data name="text" id="24" type="varStringEncoding"/>
+    </sbe:message>
+    <sbe:message name="constantStringField" id="40">
+        <field name="constantStringField" id="1" type="constantStringField"/>
+    </sbe:message>
+    <sbe:message name="groupFieldMessageWithOffsets" id="41">
+        <field name="int32Field" id="1" type="int32Field"/>
+        <group name="groupField" id="19">
+            <field name="groupOffsetField" id="23" type="charField" offset="23"/>
+            <field name="groupInt32ArrayField" id="24" type="int32ArrayField" offset="43"/>
+        </group>
+    </sbe:message>
+    <sbe:message description="SampleMessage" id="100" name="SampleMessage">
+        <field name="charField" id="1" type="charField"/>
+        <field name="offsetField" id="100" type="charField" offset="23"/>
+        <field name="char20Field" id="2" type="char20Field"/>
+        <field name="int8Field" id="3" type="int8Field"/>
+        <field name="int16Field" id="4" type="int16Field"/>
+        <field name="int32Field" id="5" type="int32Field"/>
+        <field name="constantField" id="6" type="constantField"/>
+        <field name="int64Field" id="7" type="int64Field"/>
+        <field name="uint8Field" id="8" type="uint8Field"/>
+        <field name="uint16Field" id="9" type="uint16Field"/>
+        <field name="uint32Field" id="10" type="uint32Field"/>
+        <field name="uint64Field" id="12" type="uint64Field"/>
+        <field name="floatField" id="13" type="floatField"/>
+        <field name="doubleField" id="14" type="doubleField"/>
+        <field name="int32ArrayField" id="15" type="int32ArrayField"/>
+        <field name="compositeField" id="16" type="composite"/>
+        <field name="enumField" id="17" type="enumField"/>
+        <field name="enumConstantField" id="26" type="EnumConstantField" presence="constant" valueRef="EnumConstantField.OPTION2"/>
+        <field name="choiceField" id="18" type="choices"/>
+        <group name="groupField" id="19">
+            <field name="groupFixedLengthField" id="20" type="int32Field"/>
+            <group name="subGroupField" id="21">
+                <field name="subGroupFixedLengthField" id="22" type="int32Field"/>
+                <data name="subGroupVariableLengthField" id="23" type="varStringEncoding"/>
+            </group>
+            <data name="groupVariableLengthField" id="24" type="varStringEncoding"/>
+        </group>
+        <data name="varStringField" id="25" type="varStringEncoding"/>
+    </sbe:message>
+    <sbe:message description="Envelope for sub protocols" id="101" name="MessageEnvelope">
+        <field name="charField" id="1" type="charField"/>
+    </sbe:message>
+</sbe:messageSchema>

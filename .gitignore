@@ -1,0 +1,17 @@
+### Java
+*.class
+
+# Log file
+*.log
+
+### Gradle
+**/build/
+.gradle
+
+### JetBrains
+.idea/
+out/
+
+### Generated code
+src/generatedprotocol/
+src/generateprotocol/

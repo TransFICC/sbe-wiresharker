@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbe:messageSchema xmlns:sbe="http://fixprotocol.io/2016/sbe" byteOrder="littleEndian" id="8" package="com.transficc.wiresharktools.testschema.subprotocol" semanticVersion="0.0.1" version="11">
+    <types>
+        <composite name="groupSizeEncoding" description="Repeating group dimensions">
+            <type name="blockLength" primitiveType="uint32"/>
+            <type name="numInGroup" primitiveType="uint32"/>
+        </composite>
+        <composite name="unusualGroupSizeEncoding" description="Repeating group dimensions">
+            <type name="additionalField" primitiveType="uint16"/>
+            <type name="blockLength" primitiveType="uint8"/>
+            <type name="numInGroup" primitiveType="uint8"/>
+            <type name="additionalData" primitiveType="uint32"/>
+        </composite>
+        <composite name="messageHeader" description="Message identifiers and length of message root">
+            <type name="blockLength" primitiveType="uint16"/>
+            <type name="templateId" primitiveType="uint16"/>
+            <type name="schemaId" primitiveType="uint16"/>
+            <type name="version" primitiveType="uint16"/>
+            <type name="additionalField" primitiveType="uint32"/>
+        </composite>
+        <type name="int64Field" primitiveType="int64"/>
+    </types>
+    <sbe:message name="SubProtocolMessage" id="1">
+        <field name="int64Field" id="1" type="int64"/>
+    </sbe:message>
+    <sbe:message name="duplicateAcrossSchemas" id="24">
+        <field name="duplicateFieldAcrossSchemas" id="1" type="char"/>
+    </sbe:message>
+    <sbe:message name="SubProtocolGroupFieldMessage" id="18">
+        <group name="groupField" id="19" dimensionType="unusualGroupSizeEncoding">
+            <field name="groupFixedLengthField" id="20" type="int32"/>
+        </group>
+    </sbe:message>
+
+</sbe:messageSchema>
