@@ -11,6 +11,7 @@ This project allows the generating of wireshark dissectors in Lua.
 - Dissectors will attach themselves to whatever port ranges you provide
 - Complies with SBE 1 specification
 - Will decode messages sent with a newer version of an SBE schema
+- Handles fragmentation of message stream across multiple TCP packets
 
 ### TODO:
 - Add a command line API instead of relying on programmatic invocation
